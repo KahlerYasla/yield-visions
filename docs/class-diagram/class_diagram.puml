@@ -1,0 +1,71 @@
+@startuml 
+!define RECTANGLE_COLOR #A2C2E1
+!define CLASS_COLOR #C8E6C9
+
+' Class Definitions
+
+class "CompanyGoals" as CompanyGoals <<Class>> {
+  + goalName : String
+  + successCriteria : String
+  + goalDuration : String
+  + createGoal() : void
+  + updateGoal() : void
+}
+
+class "Employee" as Employee <<Class>> {
+  + name : String
+  + position : String
+  + individualGoals : List
+  + competencies : List
+  + setGoal() : void
+  + receiveFeedback() : void
+  + giveFeedback() : void
+}
+
+class "Manager" as Manager <<Class>> {
+  + name : String
+  + position : String
+  + setCompanyGoal() : void
+  + approveEmployeeGoal() : void
+}
+
+class "Goal" as Goal <<Class>> {
+  + goalName : String
+  + successCriteria : String
+  + contributions : List
+  + createGoal() : void
+  + approveGoal() : void
+}
+
+class "Competency" as Competency <<Class>> {
+  + competencyName : String
+  + level : String
+  + assignCompetency() : void
+}
+
+class "Feedback" as Feedback <<Class>> {
+  + feedbackText : String
+  + date : Date
+  + sender : String
+  + receiver : String
+  + writeFeedback() : void
+  + readFeedback() : void
+}
+
+class "WorkPlan" as WorkPlan <<Class>> {
+  + taskName : String
+  + startDate : Date
+  + endDate : Date
+  + addTask() : void
+  + createWorkPlan() : void
+}
+
+' Relationships between classes
+Employee "1" *-- "*" Goal : has
+Manager "1" *-- "*" Goal : approves
+Manager "1" *-- "*" Feedback : gives and receives
+Employee "1" *-- "*" Feedback : gives and receives
+Employee "1" *-- "*" Competency : has
+Employee "1" *-- "*" WorkPlan : organizes tasks
+
+@enduml
