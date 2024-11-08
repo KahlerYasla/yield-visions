@@ -1,0 +1,5 @@
+# ingore these on every directory
+secret
+node_modules
+dist
+.env
